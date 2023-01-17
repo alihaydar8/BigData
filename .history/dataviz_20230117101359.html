@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 01. Données sur Wikidata</title>
+</head>
+<body>
+    
+    <h1>Une requête sur Wikidata</h1>
+
+    <p>Thème : films</p>
+    
+    <p>La requête suivante retourne 1000 résultats à la date du 17 janvier 2023.</p>
+    
+    <p><a href="https://query.wikidata.org/">https://query.wikidata.org/</a></p>
+
+    <p>
+        Code de la requête :
+        <pre>
+        <code>
+            SELECT ?film ?name ?director ?release_date 
+            WHERE {
+                ?film wdt:P31 wd:Q11424.
+                ?film wdt:P495 wd:Q30.
+                ?film rdfs:label ?name.
+                OPTIONAL{?film wdt:P57 ?director.}
+                OPTIONAL{?film wdt:P577 ?release_date.}
+            } Limit 1000
+
+        </code>
+        </pre>
+
+    </p>
+
+    <iframe style="width: 80vw; height: 50vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20%3Ffilm%20%3Fname%20%3Fdirector%20%3Frelease_date%20%0AWHERE%20%7B%0A%20%20%20%20%3Ffilm%20wdt%3AP31%20wd%3AQ11424.%0A%20%20%20%20%3Ffilm%20wdt%3AP495%20wd%3AQ30.%0A%20%20%20%20%3Ffilm%20rdfs%3Alabel%20%3Fname.%0A%20%20%20%20OPTIONAL%7B%3Ffilm%20wdt%3AP57%20%3Fdirector.%7D%0A%20%20%20%20OPTIONAL%7B%3Ffilm%20wdt%3AP577%20%3Frelease_date.%7D%0A%7D%20Limit%201000%0A%0A" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+</body>
+</html>
