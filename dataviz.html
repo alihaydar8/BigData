@@ -10,9 +10,9 @@
     
     <h1>Une requête sur Wikidata</h1>
 
-    <p>Thème : films</p>
+    <p>Thème : Country</p>
     
-    <p>La requête suivante retourne 1000 résultats à la date du 17 janvier 2023.</p>
+    <p>La requête suivante retourne 100 résultats à la date du 17 janvier 2023.</p>
     
     <p><a href="https://query.wikidata.org/">https://query.wikidata.org/</a></p>
 
@@ -20,20 +20,23 @@
         Code de la requête :
         <pre>
         <code>
-            SELECT ?film ?name ?director ?release_date 
-            WHERE {
-                ?film wdt:P31 wd:Q11424.
-                ?film wdt:P495 wd:Q30.
-                ?film rdfs:label ?name.
-                OPTIONAL{?film wdt:P57 ?director.}
-                OPTIONAL{?film wdt:P577 ?release_date.}
-            } Limit 1000
+            SELECT ?country ?countryLabel ?instance_of ?instance_ofLabel ?image ?part_of ?part_ofLabel ?author_name_string WHERE {
+                SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+                ?country wdt:P31 wd:Q6256.
+                OPTIONAL { ?country wdt:P31 ?instance_of. }
+                OPTIONAL { ?country wdt:P18 ?image. }
+                OPTIONAL { ?country wdt:P361 ?part_of. }
+                OPTIONAL { ?country wdt:P2093 ?author_name_string. }
+              }
+              LIMIT 100
 
         </code>
         </pre>
 
     </p>
 
-    <iframe style="width: 80vw; height: 50vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20%3Ffilm%20%3Fname%20%3Fdirector%20%3Frelease_date%20%0AWHERE%20%7B%0A%20%20%20%20%3Ffilm%20wdt%3AP31%20wd%3AQ11424.%0A%20%20%20%20%3Ffilm%20wdt%3AP495%20wd%3AQ30.%0A%20%20%20%20%3Ffilm%20rdfs%3Alabel%20%3Fname.%0A%20%20%20%20OPTIONAL%7B%3Ffilm%20wdt%3AP57%20%3Fdirector.%7D%0A%20%20%20%20OPTIONAL%7B%3Ffilm%20wdt%3AP577%20%3Frelease_date.%7D%0A%7D%20Limit%201000%0A%0A" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+    <iframe style="width: 80vw; height: 50vh; border: none;" src="https://query.wikidata.org/embed.html#SELECT%20%3Fcountry%20%3FcountryLabel%20%3Finstance_of%20%3Finstance_ofLabel%20%3Fimage%20%3Fpart_of%20%3Fpart_ofLabel%20%3Fauthor_name_string%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%0A%20%20%3Fcountry%20wdt%3AP31%20wd%3AQ6256.%0A%20%20OPTIONAL%20%7B%20%3Fcountry%20wdt%3AP31%20%3Finstance_of.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fcountry%20wdt%3AP18%20%3Fimage.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fcountry%20wdt%3AP361%20%3Fpart_of.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fcountry%20wdt%3AP2093%20%3Fauthor_name_string.%20%7D%0A%7D%0ALIMIT%203" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+
+
 </body>
 </html>
